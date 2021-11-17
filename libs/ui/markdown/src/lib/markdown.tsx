@@ -1,9 +1,8 @@
 import { ArrowBack } from '@mui/icons-material';
 import { Button, Container, Typography } from '@mui/material';
-import { fontSize } from '@mui/system';
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import remarkGfm from 'remark-gfm';
 
 export interface Markdown {
@@ -12,7 +11,6 @@ export interface Markdown {
 }
 
 export function Markdown() {
-  const history = useHistory();
   const params = useParams<{ id: string }>();
   const [markdown, setMarkdown] = useState<Markdown>({ md: '', name: '' });
 
