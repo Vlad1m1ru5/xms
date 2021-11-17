@@ -1,0 +1,23 @@
+{
+  "root": "libs/backend/markdown",
+  "sourceRoot": "libs/backend/markdown/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/backend/markdown/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/backend/markdown"],
+      "options": {
+        "jestConfig": "libs/backend/markdown/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@xms/backend-auth": ["libs/backend/auth/src/index.ts"],
+      "@xms/backend-markdown": ["libs/backend/markdown/src/index.ts"],
+      "@xms/backend-user": ["libs/backend/user/src/index.ts"],
+      "@xms/ui-home": ["libs/ui/home/src/index.ts"],
+      "@xms/ui-login": ["libs/ui/login/src/index.ts"],
+      "@xms/ui-markdown": ["libs/ui/markdown/src/index.ts"],
+      "@xms/ui-user": ["libs/ui/user/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

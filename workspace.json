@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "projects": {
+    "backend": "apps/backend",
+    "backend-auth": "libs/backend/auth",
+    "backend-markdown": "libs/backend/markdown",
+    "backend-user": "libs/backend/user",
+    "ui": "apps/ui",
+    "ui-e2e": "apps/ui-e2e",
+    "ui-home": "libs/ui/home",
+    "ui-login": "libs/ui/login",
+    "ui-markdown": "libs/ui/markdown",
+    "ui-user": "libs/ui/user"
+  }
+}

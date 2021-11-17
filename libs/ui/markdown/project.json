@@ -1,0 +1,23 @@
+{
+  "root": "libs/ui/markdown",
+  "sourceRoot": "libs/ui/markdown/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui/markdown/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui/markdown"],
+      "options": {
+        "jestConfig": "libs/ui/markdown/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
