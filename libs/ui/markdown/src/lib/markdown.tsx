@@ -1,17 +1,44 @@
-import styled from '@emotion/styled';
+import { ArrowBack } from '@mui/icons-material';
+import { Button, Container, Typography } from '@mui/material';
+import { fontSize } from '@mui/system';
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import remarkGfm from 'remark-gfm';
 
-/* eslint-disable-next-line */
-export interface MarkdownProps {}
+export interface Markdown {
+  md: string;
+  name: string;
+}
 
-const StyledMarkdown = styled.div`
-  color: pink;
-`;
+export function Markdown() {
+  const history = useHistory();
+  const params = useParams<{ id: string }>();
+  const [markdown, setMarkdown] = useState<Markdown>({ md: '', name: '' });
 
-export function Markdown(props: MarkdownProps) {
+  useEffect(() => {
+    fetch(`/api/markdown/${params.id}`)
+      .then((response) => response.json())
+      .then((json) => json as Markdown)
+      .then((markdown) => setMarkdown(markdown))
+      .catch(() => setMarkdown({ md: '', name: '' }));
+  }, [params.id]);
+
   return (
-    <StyledMarkdown>
-      <h1>Welcome to Markdown!</h1>
-    </StyledMarkdown>
+    <Container>
+      <Typography component="h1" variant="h2">
+        <Button
+          variant="text"
+          sx={{ mr: 2, fontSize: 'inherit', color: 'inherit' }}
+          component={Link}
+          to="/markdown"
+        >
+          <ArrowBack fontSize="inherit" />
+        </Button>
+        {markdown.name}
+      </Typography>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown.md}</ReactMarkdown>
+    </Container>
   );
 }
 

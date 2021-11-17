@@ -1,17 +1,44 @@
-import styled from '@emotion/styled';
+import {
+  Container,
+  List,
+  ListItem,
+  ListItemButton,
+  Typography,
+} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-/* eslint-disable-next-line */
-export interface MarkdownListProps {}
+export interface MarkdownEntity {
+  id: string;
+  name: string;
+}
 
-const StyledMarkdownList = styled.div`
-  color: pink;
-`;
+export function MarkdownList() {
+  const { pathname } = useLocation();
+  const [markdown, setMarkdown] = useState<{ entities: MarkdownEntity[] }>({
+    entities: [],
+  });
 
-export function MarkdownList(props: MarkdownListProps) {
+  useEffect(() => {
+    fetch('/api/markdown')
+      .then((response) => response.json())
+      .then((json) => json as MarkdownEntity[])
+      .then((entities) => setMarkdown({ entities }))
+      .catch(() => setMarkdown({ entities: [] }));
+  }, []);
+
+  const MarkdownListItem = (entity: MarkdownEntity) => (
+    <ListItem key={entity.id}>
+      <ListItemButton component={Link} to={`${pathname}/${entity.id}`}>
+        {entity.name}
+      </ListItemButton>
+    </ListItem>
+  );
+
   return (
-    <StyledMarkdownList>
-      <h1>Welcome to MarkdownList!</h1>
-    </StyledMarkdownList>
+    <Container>
+      <List>{markdown.entities.map(MarkdownListItem)}</List>
+    </Container>
   );
 }
 

@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Box,
   CssBaseline,
   Link,
   List,
@@ -67,25 +68,14 @@ export function App() {
 
   const Routes = React.memo(() => (
     <Switch>
-      <Route path="/markdown" component={MarkdownList} />
-      <Route path="/markdown/upload" component={MarkdownUpload} />
       <Route path="/markdown/:id" component={Markdown} />
-      <Route path="/user" component={UserList} />
+      <Route path="/markdown/upload" component={MarkdownUpload} />
+      <Route path="/markdown" component={MarkdownList} />
       <Route path="/user/:id" component={User} />
+      <Route path="/user" component={UserList} />
       <Route path="/login" component={Login} />
       <Route path="/" component={Home} />
     </Switch>
-  ));
-
-  const Copyright = React.memo(() => (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/Vlad1m1ru5/xms">
-        Xms
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
   ));
 
   return (
@@ -95,11 +85,16 @@ export function App() {
         <Navbar />
       </AppBar>
       <main>
-        <Routes />
+        <Box
+          sx={{
+            bgcolor: 'background.paper',
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Routes />
+        </Box>
       </main>
-      <footer>
-        <Copyright />
-      </footer>
     </React.Fragment>
   );
 }
