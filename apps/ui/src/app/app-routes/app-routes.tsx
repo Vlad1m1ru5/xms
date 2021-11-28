@@ -1,8 +1,8 @@
-import { Home } from "@xms/ui-home";
-import { Login } from "@xms/ui-login";
-import { Markdown, MarkdownList, MarkdownUpload } from "@xms/ui-markdown";
-import { User, UserList } from "@xms/ui-user";
-import { Route, Switch } from "react-router-dom";
+import { Home } from '@xms/ui-home';
+import { Login } from '@xms/ui-login';
+import { Markdown, MarkdownList, MarkdownUpload } from '@xms/ui-markdown';
+import { User, UserList } from '@xms/ui-user';
+import { Route, Switch } from 'react-router-dom';
 
 export function AppRoutes() {
   return (

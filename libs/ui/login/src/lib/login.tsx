@@ -8,9 +8,9 @@ import {
   Grid,
   Link as MaterialLink,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 
 interface LoginValues {
@@ -20,7 +20,11 @@ interface LoginValues {
 }
 
 export function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const alertValues: SubmitHandler<LoginValues> = (values) => {
     alert(JSON.stringify(values));
@@ -41,7 +45,12 @@ export function Login() {
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <Box component="form" onSubmit={handleSubmit(alertValues)} noValidate sx={{ mt: 1 }}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit(alertValues)}
+        noValidate
+        sx={{ mt: 1 }}
+      >
         <TextField
           margin="normal"
           required
@@ -51,7 +60,7 @@ export function Login() {
           autoComplete="email"
           autoFocus
           error={errors.email}
-          {...register("email", { required: true })}
+          {...register('email', { required: true })}
         />
         <TextField
           margin="normal"
@@ -62,12 +71,12 @@ export function Login() {
           id="password"
           autoComplete="current-password"
           error={errors.password}
-          {...register("password", { required: true })}
+          {...register('password', { required: true })}
         />
         <FormControlLabel
           control={<Checkbox color="primary" />}
           label="Remember me"
-          {...register("remember")}
+          {...register('remember')}
         />
         <Button
           type="submit"
