@@ -8,7 +8,7 @@ export function AppNavbar() {
       <Stack component={List} direction="row">
         <ListItem>
           <AppNavbarLink to="/">
-            <Logo width="75" height="75" />
+            <Logo width="36.5" height="36.5" />
           </AppNavbarLink>
         </ListItem>
         <ListItem>

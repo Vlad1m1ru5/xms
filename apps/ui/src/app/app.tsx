@@ -1,5 +1,6 @@
-import { AppBar, Box, CssBaseline } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline } from '@mui/material';
 import { Fragment } from 'react';
+import AppCopyright from './app-copyright/app-copyright';
 import AppNavbar from './app-navbar/app-navbar';
 import AppRoutes from './app-routes/app-routes';
 
@@ -10,7 +11,7 @@ export function App() {
       <AppBar position="sticky">
         <AppNavbar />
       </AppBar>
-      <main>
+      <Container component="main">
         <Box
           sx={{
             bgcolor: 'background.paper',
@@ -20,7 +21,10 @@ export function App() {
         >
           <AppRoutes />
         </Box>
-      </main>
+      </Container>
+      <Container component="footer">
+        <AppCopyright />
+      </Container>
     </Fragment>
   );
 }
