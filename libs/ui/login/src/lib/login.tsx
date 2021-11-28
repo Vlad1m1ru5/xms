@@ -16,6 +16,7 @@ import { Link as RouterLink } from 'react-router-dom';
 interface LoginValues {
   username: string;
   password: string;
+  remember: boolean;
 }
 
 export function Login() {
@@ -64,8 +65,9 @@ export function Login() {
           {...register("password", { required: true })}
         />
         <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
+          control={<Checkbox color="primary" />}
           label="Remember me"
+          {...register("remember")}
         />
         <Button
           type="submit"
