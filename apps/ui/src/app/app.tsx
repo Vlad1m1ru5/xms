@@ -1,20 +1,21 @@
 import { AppBar, Box, Container, CssBaseline } from '@mui/material';
 import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import AppCopyright from './app-copyright/app-copyright';
 import AppNavbar from './app-navbar/app-navbar';
 import AppRoutes from './app-routes/app-routes';
-import { AuthFetchStatusDTO, fetchAuth, selectIsAuth } from './auth.slice';
+import { AuthFetchStatusDto } from './auth.api';
+import { fetchAuth, selectIsAuth } from './auth.slice';
 
 export function App() {
   const history = useHistory();
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
 
-  const handleLogin = (user: AuthFetchStatusDTO) => {
+  const handleLogin = (user: AuthFetchStatusDto) => {
     dispatch(fetchAuth(user));
-    history.push("/");
+    history.push('/');
   };
 
   return (

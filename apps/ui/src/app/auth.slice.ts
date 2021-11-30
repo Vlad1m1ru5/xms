@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchStatus } from './auth.api';
 
 export const AUTH_FEATURE_KEY = 'auth';
 
@@ -12,23 +13,7 @@ export interface AuthState {
   auth: AuthEntity;
 }
 
-export interface AuthFetchStatusDTO {
-  username: string;
-  password: string;
-}
-
-export const fetchAuth = createAsyncThunk(
-  'auth/fetchStatus',
-  async (payload: AuthFetchStatusDTO) => {
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: { 'Content-Type': 'application/json' },
-    };
-    const response = await fetch('/api/auth/login', options);
-    return await response.json();
-  }
-);
+export const fetchAuth = createAsyncThunk('auth/fetchStatus', fetchStatus);
 
 export const initialAuthState: AuthState = {
   loadingStatus: 'not loaded',
