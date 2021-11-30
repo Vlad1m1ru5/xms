@@ -8,9 +8,9 @@ import {
   Grid,
   Link as MaterialLink,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 
 interface LoginValues {
@@ -19,16 +19,16 @@ interface LoginValues {
   remember: boolean;
 }
 
-export function Login() {
+export interface LoginProps {
+  handleLogin: (values: LoginValues) => void;
+}
+
+export function Login(props: LoginProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const alertValues: SubmitHandler<LoginValues> = (values) => {
-    alert(JSON.stringify(values));
-  };
 
   return (
     <Box
@@ -47,7 +47,7 @@ export function Login() {
       </Typography>
       <Box
         component="form"
-        onSubmit={handleSubmit(alertValues)}
+        onSubmit={handleSubmit(props.handleLogin)}
         noValidate
         sx={{ mt: 1 }}
       >
@@ -55,12 +55,11 @@ export function Login() {
           margin="normal"
           required
           fullWidth
-          id="email"
-          label="Email Address"
-          autoComplete="email"
+          label="Username"
+          autoComplete="username"
           autoFocus
           error={errors.email}
-          {...register('email', { required: true })}
+          {...register('username', { required: true })}
         />
         <TextField
           margin="normal"
@@ -68,7 +67,6 @@ export function Login() {
           fullWidth
           label="Password"
           type="password"
-          id="password"
           autoComplete="current-password"
           error={errors.password}
           {...register('password', { required: true })}

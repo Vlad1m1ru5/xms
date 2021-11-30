@@ -1,19 +1,28 @@
 import { Home } from '@xms/ui-home';
-import { Login } from '@xms/ui-login';
+import { Login, LoginProps } from '@xms/ui-login';
 import { Markdown, MarkdownList, MarkdownUpload } from '@xms/ui-markdown';
 import { User, UserList } from '@xms/ui-user';
 import { Route, Switch } from 'react-router-dom';
 
-export function AppRoutes() {
+export interface AppRoutesProps extends LoginProps {
+  isAuth: boolean;
+}
+
+export function AppRoutes(props: AppRoutesProps) {
   return (
     <Switch>
-      <Route path="/markdown/:id" component={Markdown} />
-      <Route path="/markdown/upload" component={MarkdownUpload} />
-      <Route path="/markdown" component={MarkdownList} />
-      <Route path="/user/:id" component={User} />
-      <Route path="/user" component={UserList} />
-      <Route path="/login" component={Login} />
-      <Route path="/" component={Home} />
+      {props.isAuth && <Route path="/markdown/:id" component={Markdown} />}
+      {props.isAuth && (
+        <Route path="/markdown/upload" component={MarkdownUpload} />
+      )}
+      {props.isAuth && <Route path="/markdown" component={MarkdownList} />}
+      {props.isAuth && <Route path="/user/:id" component={User} />}
+      {props.isAuth && <Route path="/user" component={UserList} />}
+      <Route
+        path="/login"
+        render={() => <Login handleLogin={props.handleLogin} />}
+      />
+      <Route path="/" render={() => <Home isAuth={props.isAuth} />} />
     </Switch>
   );
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { FindUser } from './dto/find-user.dto';
+import { FindUserDto } from './dto/find-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
@@ -26,7 +26,7 @@ export class UserService {
     return this.userRepository.findOne(id);
   }
 
-  findOneByUser(findUserDto: FindUser) {
+  findOneByUser(findUserDto: FindUserDto) {
     return this.userRepository.findOne(findUserDto);
   }
 

@@ -1,8 +1,22 @@
 import { List, ListItem, Stack, Toolbar, Typography } from '@mui/material';
+import { useMemo } from 'react';
 import AppNavbarLink from '../app-navbar-link/app-navbar-link';
 import { ReactComponent as Logo } from '../logo.svg';
 
-export function AppNavbar() {
+export interface AppNavbarProps {
+  isAuth: boolean;
+}
+
+export function AppNavbar(props: AppNavbarProps) {
+  const routes = useMemo(() => {
+    return props.isAuth
+      ? [
+          { path: '/user', label: 'User' },
+          { path: '/markdown', label: 'Markdown' },
+        ]
+      : [{ path: '/login', label: 'Sign in' }];
+  }, [props.isAuth]);
+
   return (
     <Toolbar component="nav" aria-label="navigation">
       <Stack component={List} direction="row">
@@ -11,27 +25,15 @@ export function AppNavbar() {
             <Logo width="36.5" height="36.5" />
           </AppNavbarLink>
         </ListItem>
-        <ListItem>
-          <AppNavbarLink to="/user">
-            <Typography component="h5" variant="h6">
-              User
-            </Typography>
-          </AppNavbarLink>
-        </ListItem>
-        <ListItem>
-          <AppNavbarLink to="/markdown">
-            <Typography component="h5" variant="h6">
-              Markdown
-            </Typography>
-          </AppNavbarLink>
-        </ListItem>
-        <ListItem>
-          <AppNavbarLink to="/login">
-            <Typography component="h5" variant="h6">
-              Login
-            </Typography>
-          </AppNavbarLink>
-        </ListItem>
+        {routes.map((route) => (
+          <ListItem key={route.path}>
+            <AppNavbarLink to={route.path}>
+              <Typography component="h5" variant="h6" noWrap>
+                {route.label}
+              </Typography>
+            </AppNavbarLink>
+          </ListItem>
+        ))}
       </Stack>
     </Toolbar>
   );

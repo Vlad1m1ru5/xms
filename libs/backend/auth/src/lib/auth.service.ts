@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { FindUser, UserService } from '@xms/backend-user';
+import { FindUserDto, UserService } from '@xms/backend-user';
 import { LoginDto } from './dto/login.dto';
 import { SignPayloadDto } from './dto/sign-payload.dto';
 import { ValidateDto } from './dto/validate.dto';
@@ -13,13 +13,13 @@ export class AuthService {
   ) {}
 
   async validateUser(validateUserDto: ValidateDto) {
-    const findUser = new FindUser(
+    const findUser = new FindUserDto(
       validateUserDto.username,
       validateUserDto.password
     );
     const user = await this.userService.findOneByUser(findUser);
     if (user && user.password === validateUserDto.password) {
-      return user;
+      return { username: user.username, id: user.id.toString() };
     }
     return null;
   }
@@ -30,7 +30,7 @@ export class AuthService {
       loginUserDto.id
     );
     return {
-      access_token: this.jwtService.sign(signPayload),
+      access_token: this.jwtService.sign({ ...signPayload }),
     };
   }
 }
