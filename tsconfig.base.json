@@ -17,6 +17,7 @@
     "paths": {
       "@xms/backend-auth": ["libs/backend/auth/src/index.ts"],
       "@xms/backend-markdown": ["libs/backend/markdown/src/index.ts"],
+      "@xms/backend-role": ["libs/backend/role/src/index.ts"],
       "@xms/backend-user": ["libs/backend/user/src/index.ts"],
       "@xms/ui-home": ["libs/ui/home/src/index.ts"],
       "@xms/ui-login": ["libs/ui/login/src/index.ts"],

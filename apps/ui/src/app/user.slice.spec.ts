@@ -1,17 +1,17 @@
-import { fetchAuth, authAdapter, authReducer } from './auth.slice';
+import { fetchUser, userAdapter, userReducer } from './user.slice';
 
-describe('auth reducer', () => {
+describe('user reducer', () => {
   it('should handle initial state', () => {
-    const expected = authAdapter.getInitialState({
+    const expected = userAdapter.getInitialState({
       loadingStatus: 'not loaded',
       error: null,
     });
 
-    expect(authReducer(undefined, { type: '' })).toEqual(expected);
+    expect(userReducer(undefined, { type: '' })).toEqual(expected);
   });
 
-  it('should handle fetchAuths', () => {
-    let state = authReducer(undefined, fetchAuth.pending(null, null));
+  it('should handle fetchUsers', () => {
+    let state = userReducer(undefined, fetchUser.pending(null, null));
 
     expect(state).toEqual(
       expect.objectContaining({
@@ -21,7 +21,7 @@ describe('auth reducer', () => {
       })
     );
 
-    state = authReducer(state, fetchAuth.fulfilled([{ id: 1 }], null, null));
+    state = userReducer(state, fetchUser.fulfilled([{ id: 1 }], null, null));
 
     expect(state).toEqual(
       expect.objectContaining({
@@ -31,9 +31,9 @@ describe('auth reducer', () => {
       })
     );
 
-    state = authReducer(
+    state = userReducer(
       state,
-      fetchAuth.rejected(new Error('Uh oh'), null, null)
+      fetchUser.rejected(new Error('Uh oh'), null, null)
     );
 
     expect(state).toEqual(

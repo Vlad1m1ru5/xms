@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 
 export interface AppRoutesProps extends LoginProps {
   isAuth: boolean;
+  isAdmin: boolean;
 }
 
 export function AppRoutes(props: AppRoutesProps) {
@@ -16,13 +17,16 @@ export function AppRoutes(props: AppRoutesProps) {
         <Route path="/markdown/upload" component={MarkdownUpload} />
       )}
       {props.isAuth && <Route path="/markdown" component={MarkdownList} />}
-      {props.isAuth && <Route path="/user/:id" component={User} />}
-      {props.isAuth && <Route path="/user" component={UserList} />}
+      {props.isAdmin && <Route path="/user/:id" component={User} />}
+      {props.isAdmin && <Route path="/user" component={UserList} />}
       <Route
         path="/login"
         render={() => <Login handleLogin={props.handleLogin} />}
       />
-      <Route path="/" render={() => <Home isAuth={props.isAuth} />} />
+      <Route
+        path="/"
+        render={() => <Home isAuth={props.isAuth} isAdmin={props.isAdmin} />}
+      />
     </Switch>
   );
 }

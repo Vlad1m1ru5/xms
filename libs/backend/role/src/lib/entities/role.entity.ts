@@ -1,16 +1,13 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Role {
   @ObjectIdColumn()
   id: ObjectID;
 
   @Column()
-  username: string;
+  name: string;
 
   @Column()
-  password: string;
-
-  @Column()
-  roleId: string;
+  users: string[];
 }

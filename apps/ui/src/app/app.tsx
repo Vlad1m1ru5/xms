@@ -5,16 +5,23 @@ import { useHistory } from 'react-router-dom';
 import AppCopyright from './app-copyright/app-copyright';
 import AppNavbar from './app-navbar/app-navbar';
 import AppRoutes from './app-routes/app-routes';
-import { AuthFetchStatusDto } from './auth.api';
-import { fetchAuth, selectIsAuth } from './auth.slice';
+import { StatusFetchDto } from './user.api';
+import {
+  fetchUser,
+  selectIsAdmin,
+  selectIsAuth,
+  userActions
+} from './user.slice';
 
 export function App() {
   const history = useHistory();
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
+  const isAdmin = useSelector(selectIsAdmin);
 
-  const handleLogin = (user: AuthFetchStatusDto) => {
-    dispatch(fetchAuth(user));
+  const handleLogin = (user: StatusFetchDto) => {
+    isAuth && dispatch(userActions.remove());
+    dispatch(fetchUser(user));
     history.push('/');
   };
 
@@ -22,7 +29,7 @@ export function App() {
     <Fragment>
       <CssBaseline />
       <AppBar position="sticky">
-        <AppNavbar isAuth={isAuth} />
+        <AppNavbar isAuth={isAuth} isAdmin={isAdmin} />
       </AppBar>
       <Container component="main">
         <Box
@@ -32,7 +39,11 @@ export function App() {
             pb: 6,
           }}
         >
-          <AppRoutes isAuth={isAuth} handleLogin={handleLogin} />
+          <AppRoutes
+            isAuth={isAuth}
+            isAdmin={isAdmin}
+            handleLogin={handleLogin}
+          />
         </Box>
       </Container>
       <Container component="footer">

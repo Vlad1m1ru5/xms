@@ -1,7 +1,8 @@
-import { MarkdownModule } from '@xms/backend-markdown';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '@xms/backend-auth';
+import { MarkdownModule } from '@xms/backend-markdown';
+import { RoleModule } from '@xms/backend-role';
 import { UserModule } from '@xms/backend-user';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -16,9 +17,10 @@ import { AppService } from './app.service';
       logging: false,
       autoLoadEntities: true,
     }),
-    MarkdownModule,
-    UserModule,
     AuthModule,
+    MarkdownModule,
+    RoleModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

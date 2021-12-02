@@ -5,17 +5,23 @@ import { ReactComponent as Logo } from '../logo.svg';
 
 export interface AppNavbarProps {
   isAuth: boolean;
+  isAdmin: boolean;
 }
 
 export function AppNavbar(props: AppNavbarProps) {
   const routes = useMemo(() => {
-    return props.isAuth
-      ? [
-          { path: '/user', label: 'User' },
-          { path: '/markdown', label: 'Markdown' },
-        ]
-      : [{ path: '/login', label: 'Sign in' }];
-  }, [props.isAuth]);
+    if (!props.isAuth) {
+      return [{ path: '/login', label: 'Sign in' }];
+    }
+
+    const availableRoutes = [{ path: '/markdown', label: 'Markdown' }];
+
+    if (props.isAdmin) {
+      availableRoutes.push({ path: '/user', label: 'User' });
+    }
+
+    return availableRoutes;
+  }, [props.isAuth, props.isAdmin]);
 
   return (
     <Toolbar component="nav" aria-label="navigation">

@@ -4,6 +4,7 @@
     "backend": "apps/backend",
     "backend-auth": "libs/backend/auth",
     "backend-markdown": "libs/backend/markdown",
+    "backend-role": "libs/backend/role",
     "backend-user": "libs/backend/user",
     "ui": "apps/ui",
     "ui-e2e": "apps/ui-e2e",
