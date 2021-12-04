@@ -19,7 +19,12 @@ export function AppRoutes(props: AppRoutesProps) {
           render={() => <MarkdownList uploadPath="/markdown/upload" />}
         />
       )}
-      {props.isAdmin && <Route path="/user/:id" component={User} />}
+      {props.isAdmin && (
+        <Route
+          path="/user/:id"
+          render={({ match }) => <User userId={match.params.id} />}
+        />
+      )}
       {props.isAdmin && <Route path="/user" component={UserList} />}
       <Route
         path="/login"

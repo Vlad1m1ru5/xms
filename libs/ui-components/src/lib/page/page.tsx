@@ -3,16 +3,20 @@ import { Title } from '@xms/ui-components';
 import { ReactNode } from 'react';
 
 export interface PageProps {
-  children?: ReactNode;
-  titleName: string;
+  titleName?: string;
   titlePrevPagePath?: string;
+  children?: ReactNode;
 }
 
-export function Page(props: PageProps) {
+export function Page({
+  titleName = '',
+  titlePrevPagePath,
+  children,
+}: PageProps) {
   return (
     <Container>
-      <Title name={props.titleName} prevPagePath={props.titlePrevPagePath} />
-      {props.children}
+      <Title name={titleName} prevPagePath={titlePrevPagePath} />
+      {children}
     </Container>
   );
 }

@@ -20,6 +20,7 @@
       "@xms/backend-role": ["libs/backend/role/src/index.ts"],
       "@xms/backend-user": ["libs/backend/user/src/index.ts"],
       "@xms/ui-components": ["libs/ui-components/src/index.ts"],
+      "@xms/ui-fetcher": ["libs/ui-fetcher/src/index.ts"],
       "@xms/ui-home": ["libs/ui/home/src/index.ts"],
       "@xms/ui-login": ["libs/ui/login/src/index.ts"],
       "@xms/ui-markdown": ["libs/ui/markdown/src/index.ts"],

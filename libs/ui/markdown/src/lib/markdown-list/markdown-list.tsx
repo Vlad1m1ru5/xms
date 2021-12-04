@@ -1,7 +1,7 @@
 import { Box, List, ListItem } from '@mui/material';
 import { Link, Page } from '@xms/ui-components';
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import useSwr from 'swr';
 
 export interface MarkdownEntity {
   id: string;
@@ -14,17 +14,12 @@ export interface MarkdownListProps {
 
 export function MarkdownList(props: MarkdownListProps) {
   const { pathname } = useLocation();
-  const [markdown, setMarkdown] = useState<{ entities: MarkdownEntity[] }>({
-    entities: [],
-  });
-
-  useEffect(() => {
-    fetch('/api/markdown')
+  const { data } = useSwr('/api/markdown', (markdownApi) =>
+    fetch(markdownApi)
       .then((response) => response.json())
       .then((json) => json as MarkdownEntity[])
-      .then((entities) => setMarkdown({ entities }))
-      .catch(() => setMarkdown({ entities: [] }));
-  }, []);
+      .catch(() => [])
+  );
 
   const MarkdownListItem = (entity: MarkdownEntity) => (
     <ListItem key={entity.id}>
@@ -34,6 +29,9 @@ export function MarkdownList(props: MarkdownListProps) {
     </ListItem>
   );
 
+  const getListItems = () =>
+    !data ? 'Loading...' : data.map(MarkdownListItem);
+
   return (
     <Page titleName="Markdown List" titlePrevPagePath="/">
       <Box sx={{ mt: 1 }}>
@@ -41,7 +39,7 @@ export function MarkdownList(props: MarkdownListProps) {
           Upload
         </Link>
       </Box>
-      <List>{markdown.entities.map(MarkdownListItem)}</List>
+      <List>{getListItems()}</List>
     </Page>
   );
 }
