@@ -10,7 +10,7 @@ import {
   fetchUser,
   selectIsAdmin,
   selectIsAuth,
-  userActions
+  userActions,
 } from './user.slice';
 
 export function App() {
@@ -24,6 +24,9 @@ export function App() {
     dispatch(fetchUser(user));
     history.push('/');
   };
+
+  const handleUpload = (data: FormData) =>
+    fetch('/api/markdown', { method: 'POST', body: data });
 
   return (
     <Fragment>
@@ -43,6 +46,7 @@ export function App() {
             isAuth={isAuth}
             isAdmin={isAdmin}
             handleLogin={handleLogin}
+            handleUpload={handleUpload}
           />
         </Box>
       </Container>

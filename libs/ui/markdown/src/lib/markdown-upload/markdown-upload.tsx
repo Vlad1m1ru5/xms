@@ -3,13 +3,13 @@ import { Page } from '@xms/ui-components';
 import { useForm } from 'react-hook-form';
 
 interface UploadValues {
-  file: string;
+  file: FileList;
   private?: boolean;
 }
 
 /* eslint-disable-next-line */
 export interface MarkdownUploadProps {
-  handleUpload: (values: UploadValues) => void;
+  handleUpload: (formData: FormData) => void;
 }
 
 export function MarkdownUpload(props: MarkdownUploadProps) {
@@ -19,11 +19,18 @@ export function MarkdownUpload(props: MarkdownUploadProps) {
     register,
   } = useForm();
 
+  const handleTransformAndSubmit = (values: UploadValues) => {
+    const formData = new FormData();
+    const file = values.file.item(0);
+    file && formData.append('file', file);
+    props.handleUpload(formData);
+  };
+
   return (
     <Page titleName="Markdown Upload" titlePrevPagePath="/markdown">
       <Box
         component="form"
-        onSubmit={handleSubmit(props.handleUpload)}
+        onSubmit={handleSubmit(handleTransformAndSubmit)}
         sx={{ mt: 1 }}
         noValidate
       >

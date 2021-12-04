@@ -1,22 +1,32 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
-import { MarkdownService } from './markdown.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import 'multer';
+import { ObjectID } from 'typeorm';
 import { CreateMarkdownDto } from './dto/create-markdown.dto';
 import { UpdateMarkdownDto } from './dto/update-markdown.dto';
+import { MarkdownService } from './markdown.service';
 
 @Controller('markdown')
 export class MarkdownController {
   constructor(private readonly markdownService: MarkdownService) {}
 
   @Post()
-  create(@Body() createMarkdownDto: CreateMarkdownDto) {
+  @UseInterceptors(FileInterceptor('file'))
+  create(@UploadedFile() file: Express.Multer.File) {
+    const createMarkdownDto = new CreateMarkdownDto();
+    createMarkdownDto.md = file.buffer.toString();
+    createMarkdownDto.name = file.originalname;
+
     return this.markdownService.create(createMarkdownDto);
   }
 
@@ -26,8 +36,8 @@ export class MarkdownController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.markdownService.findOne(+id);
+  findOne(@Param('id') id: ObjectID) {
+    return this.markdownService.findOne(id);
   }
 
   @Patch(':id')

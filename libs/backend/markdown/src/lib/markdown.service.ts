@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MongoRepository } from 'typeorm';
+import { MongoRepository, ObjectID } from 'typeorm';
 import { CreateMarkdownDto } from './dto/create-markdown.dto';
 import { UpdateMarkdownDto } from './dto/update-markdown.dto';
 import { Markdown } from './entities/markdown.entity';
@@ -21,7 +21,7 @@ export class MarkdownService {
     return this.markdownRepository.find();
   }
 
-  findOne(id: number) {
+  findOne(id: ObjectID) {
     return this.markdownRepository.findOne(id);
   }
 
