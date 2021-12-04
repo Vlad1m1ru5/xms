@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -8,12 +7,14 @@ import {
   List,
   Typography,
 } from '@mui/material';
+import { Link } from '@xms/ui-components';
 import { ReactNode } from 'react';
 
 export interface HomeCardProps {
   title: string;
   description: string[];
   buttonText: ReactNode;
+  buttonPath: string;
 }
 
 export function HomeCard(props: HomeCardProps) {
@@ -45,9 +46,9 @@ export function HomeCard(props: HomeCardProps) {
           </List>
         </CardContent>
         <CardActions>
-          <Button fullWidth variant="contained">
+          <Link fullWidth variant="contained" to={props.buttonPath}>
             {props.buttonText}
-          </Button>
+          </Link>
         </CardActions>
       </Card>
     </Grid>

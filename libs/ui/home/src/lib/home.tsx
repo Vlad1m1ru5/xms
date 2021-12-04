@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import HomeCard from './home-card/home-card';
-import HomeLink from './home-link/home-link';
 import HomeShowcase from './home-showcase/home-showcase';
 
 export interface HomeProps {
@@ -15,7 +14,8 @@ export function Home(props: HomeProps) {
         {
           title: 'User Account',
           description: [],
-          buttonText: <HomeLink to="/login">Sign in</HomeLink>,
+          buttonText: 'Sign in',
+          buttonPath: '/login',
         },
       ];
     }
@@ -28,7 +28,8 @@ export function Home(props: HomeProps) {
           'Explore contents',
           'Upload documents',
         ],
-        buttonText: <HomeLink to="/markdown">Explore</HomeLink>,
+        buttonText: 'Explore',
+        buttonPath: '/markdown',
       },
     ];
 
@@ -37,12 +38,14 @@ export function Home(props: HomeProps) {
         {
           title: 'User',
           description: ['Add users', 'Administrate roles', 'Restrict access'],
-          buttonText: <HomeLink to="/user">Administrate</HomeLink>,
+          buttonText: 'Administrate',
+          buttonPath: '/user',
         },
         {
           title: 'Events',
           description: ['Monitor events', 'Explore history', 'Show changes'],
-          buttonText: <HomeLink to="/event">Monitor</HomeLink>,
+          buttonText: 'Monitor',
+          buttonPath: '/event',
         }
       );
     }
