@@ -1,8 +1,7 @@
-import { ArrowBack } from '@mui/icons-material';
-import { Button, Container, Typography } from '@mui/material';
+import { Page } from '@xms/ui-components';
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import remarkGfm from 'remark-gfm';
 
 export interface Markdown {
@@ -23,20 +22,9 @@ export function Markdown() {
   }, [params.id]);
 
   return (
-    <Container>
-      <Typography component="h1" variant="h2">
-        <Button
-          variant="text"
-          sx={{ mr: 2, fontSize: 'inherit', color: 'inherit' }}
-          component={Link}
-          to="/markdown"
-        >
-          <ArrowBack fontSize="inherit" />
-        </Button>
-        {markdown.name}
-      </Typography>
+    <Page titleName={markdown.name} titlePrevPagePath="/markdown">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown.md}</ReactMarkdown>
-    </Container>
+    </Page>
   );
 }
 

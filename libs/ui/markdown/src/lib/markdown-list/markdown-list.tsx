@@ -1,19 +1,18 @@
-import {
-  Container,
-  List,
-  ListItem,
-  ListItemButton,
-  Typography,
-} from '@mui/material';
+import { Box, List, ListItem } from '@mui/material';
+import { Link, Page } from '@xms/ui-components';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export interface MarkdownEntity {
   id: string;
   name: string;
 }
 
-export function MarkdownList() {
+export interface MarkdownListProps {
+  uploadPath: string;
+}
+
+export function MarkdownList(props: MarkdownListProps) {
   const { pathname } = useLocation();
   const [markdown, setMarkdown] = useState<{ entities: MarkdownEntity[] }>({
     entities: [],
@@ -29,16 +28,21 @@ export function MarkdownList() {
 
   const MarkdownListItem = (entity: MarkdownEntity) => (
     <ListItem key={entity.id}>
-      <ListItemButton component={Link} to={`${pathname}/${entity.id}`}>
+      <Link to={`${pathname}/${entity.id}`} fullWidth>
         {entity.name}
-      </ListItemButton>
+      </Link>
     </ListItem>
   );
 
   return (
-    <Container>
+    <Page titleName="Markdown List" titlePrevPagePath="/">
+      <Box sx={{ mt: 1 }}>
+        <Link variant="contained" to={props.uploadPath}>
+          Upload
+        </Link>
+      </Box>
       <List>{markdown.entities.map(MarkdownListItem)}</List>
-    </Container>
+    </Page>
   );
 }
 

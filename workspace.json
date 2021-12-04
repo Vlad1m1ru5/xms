@@ -7,6 +7,7 @@
     "backend-role": "libs/backend/role",
     "backend-user": "libs/backend/user",
     "ui": "apps/ui",
+    "ui-components": "libs/ui-components",
     "ui-e2e": "apps/ui-e2e",
     "ui-home": "libs/ui/home",
     "ui-login": "libs/ui/login",
